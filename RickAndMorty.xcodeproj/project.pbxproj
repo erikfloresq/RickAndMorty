@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0846765B25C3856D0073E229 /* CharactersTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0846765A25C3856D0073E229 /* CharactersTableView.xib */; };
+		0846766025C3858C0073E229 /* CharacterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0846765F25C3858C0073E229 /* CharacterTableViewCell.xib */; };
 		084DC7C225C2263000429400 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DC7C125C2263000429400 /* AppDelegate.swift */; };
 		084DC7C425C2263000429400 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DC7C325C2263000429400 /* SceneDelegate.swift */; };
 		084DC7C625C2263000429400 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DC7C525C2263000429400 /* MainViewController.swift */; };
@@ -23,7 +25,8 @@
 		084DC83125C230E200429400 /* ResponseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DC83025C230E200429400 /* ResponseInfo.swift */; };
 		084DC83625C2316600429400 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DC83525C2316600429400 /* Character.swift */; };
 		084DC83B25C2328200429400 /* ResponseCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DC83A25C2328200429400 /* ResponseCharacter.swift */; };
-		084DC87025C2BB7D00429400 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 084DC86F25C2BB7D00429400 /* Main.storyboard */; };
+		08A5007D25C3921D00E95520 /* CharactersTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A5007C25C3921D00E95520 /* CharactersTableViewModel.swift */; };
+		08A5008325C3935600E95520 /* CharactersTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A5008225C3935600E95520 /* CharactersTableViewDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0846765A25C3856D0073E229 /* CharactersTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharactersTableView.xib; sourceTree = "<group>"; };
+		0846765F25C3858C0073E229 /* CharacterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharacterTableViewCell.xib; sourceTree = "<group>"; };
 		084DC7BE25C2263000429400 /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		084DC7C125C2263000429400 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		084DC7C325C2263000429400 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,7 +71,8 @@
 		084DC83025C230E200429400 /* ResponseInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseInfo.swift; sourceTree = "<group>"; };
 		084DC83525C2316600429400 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		084DC83A25C2328200429400 /* ResponseCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseCharacter.swift; sourceTree = "<group>"; };
-		084DC86F25C2BB7D00429400 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		08A5007C25C3921D00E95520 /* CharactersTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersTableViewModel.swift; sourceTree = "<group>"; };
+		08A5008225C3935600E95520 /* CharactersTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersTableViewDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +100,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0846765825C385330073E229 /* CharactersTableView */ = {
+			isa = PBXGroup;
+			children = (
+				084DC7FF25C228C200429400 /* CharactersTableView.swift */,
+				0846765A25C3856D0073E229 /* CharactersTableView.xib */,
+				08A5007C25C3921D00E95520 /* CharactersTableViewModel.swift */,
+			);
+			path = CharactersTableView;
+			sourceTree = "<group>";
+		};
+		0846765925C385400073E229 /* CharacterTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				084DC80725C2291800429400 /* CharacterTableViewCell.swift */,
+				0846765F25C3858C0073E229 /* CharacterTableViewCell.xib */,
+			);
+			path = CharacterTableViewCell;
+			sourceTree = "<group>";
+		};
 		084DC7B525C2263000429400 = {
 			isa = PBXGroup;
 			children = (
@@ -117,7 +142,7 @@
 		084DC7C025C2263000429400 /* RickAndMorty */ = {
 			isa = PBXGroup;
 			children = (
-				084DC86E25C2BB6700429400 /* Storyboard */,
+				08A5008125C3934A00E95520 /* Delegates */,
 				084DC82725C22F1C00429400 /* API */,
 				084DC81E25C22ED400429400 /* Networking */,
 				084DC7FE25C2288900429400 /* Resources */,
@@ -162,8 +187,8 @@
 		084DC7F825C2284600429400 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				084DC7FF25C228C200429400 /* CharactersTableView.swift */,
-				084DC80725C2291800429400 /* CharacterTableViewCell.swift */,
+				0846765825C385330073E229 /* CharactersTableView */,
+				0846765925C385400073E229 /* CharacterTableViewCell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -203,12 +228,12 @@
 			path = API;
 			sourceTree = "<group>";
 		};
-		084DC86E25C2BB6700429400 /* Storyboard */ = {
+		08A5008125C3934A00E95520 /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
-				084DC86F25C2BB7D00429400 /* Main.storyboard */,
+				08A5008225C3935600E95520 /* CharactersTableViewDataSource.swift */,
 			);
-			path = Storyboard;
+			path = Delegates;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -314,9 +339,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				084DC87025C2BB7D00429400 /* Main.storyboard in Resources */,
 				084DC7CE25C2263100429400 /* LaunchScreen.storyboard in Resources */,
+				0846766025C3858C0073E229 /* CharacterTableViewCell.xib in Resources */,
 				084DC7CB25C2263100429400 /* Assets.xcassets in Resources */,
+				0846765B25C3856D0073E229 /* CharactersTableView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,8 +377,10 @@
 				084DC82925C22F4F00429400 /* RickAndMortyAPI.swift in Sources */,
 				084DC80F25C22D2E00429400 /* DetailViewController.swift in Sources */,
 				084DC81725C22D9D00429400 /* MainNavigationController.swift in Sources */,
+				08A5008325C3935600E95520 /* CharactersTableViewDataSource.swift in Sources */,
 				084DC7C225C2263000429400 /* AppDelegate.swift in Sources */,
 				084DC7C425C2263000429400 /* SceneDelegate.swift in Sources */,
+				08A5007D25C3921D00E95520 /* CharactersTableViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

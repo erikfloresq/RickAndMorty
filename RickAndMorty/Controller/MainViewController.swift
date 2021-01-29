@@ -9,11 +9,20 @@ import UIKit
 import Combine
 
 class MainViewController: UIViewController {
-    @IBOutlet weak var mainTableView: CharactersTableView!
+    let mainTableView = CharactersTableView().loadFromNib()
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         super.loadView()
-        mainTableView.dataSource = self
+        view.backgroundColor = .systemBackground
+        view = mainTableView
     }
 
     override func viewDidLoad() {
@@ -21,19 +30,5 @@ class MainViewController: UIViewController {
         title = "Characters"
     }
 
-}
-
-extension MainViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let dequeueCell = tableView.dequeueReusableCell(withIdentifier: "CharacterTableViewCell", for: indexPath)
-        guard let cell = dequeueCell as? CharacterTableViewCell else {
-            return UITableViewCell()
-        }
-        return cell
-    }
 }
 

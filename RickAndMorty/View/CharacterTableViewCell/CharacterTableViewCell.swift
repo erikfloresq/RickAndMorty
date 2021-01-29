@@ -9,6 +9,9 @@ import UIKit
 
 class CharacterTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var photo: UIImageView!
+    @IBOutlet weak var name: UILabel!
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
