@@ -8,15 +8,28 @@
 import Foundation
 
 protocol CharactersTableViewModelProtocol {
-    var characters: [String] { get set }
+    var characters: [Character] { get set }
     
     func charactersCount() -> Int
 }
 
 class CharactersTableViewModel: CharactersTableViewModelProtocol {
-    var characters = [String]()
+    let networking = Networking()
+    
+    var characters = [Character]()
     
     func charactersCount() -> Int {
-        return 5
+        return characters.count
+    }
+    
+    func getCharacters() {
+        networking.request(url: RickAndMortyAPI.characters) { result in
+            switch result {
+            case .success(let characters):
+                self.characters = characters
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
