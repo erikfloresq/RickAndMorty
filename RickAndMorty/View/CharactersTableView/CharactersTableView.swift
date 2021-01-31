@@ -8,7 +8,6 @@
 import UIKit
 
 class CharactersTableView: UITableView {
-    let tableViewdataSource = CharactersTableViewDataSource()
 
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -28,7 +27,6 @@ class CharactersTableView: UITableView {
     
     private func setup() {
         registerCell()
-        dataSource = tableViewdataSource
     }
     
     private func registerCell() {

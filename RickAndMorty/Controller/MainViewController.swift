@@ -9,10 +9,13 @@ import UIKit
 import Combine
 
 class MainViewController: UIViewController {
-    let mainTableView = CharactersTableView().loadFromNib()
+    let viewModel: MainViewModelProtocol
+    let characterTableView = CharactersTableView().loadFromNib()
+    lazy var dataSource = CharactersTableViewDataSource(viewModel: viewModel)
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    init(viewModel: MainViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -21,13 +24,26 @@ class MainViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
+        title = "Characters"
         view.backgroundColor = .systemBackground
-        view = mainTableView
+        view = characterTableView
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Characters"
+        viewModel.getCharacters()
+        bindElements()
+        
+        characterTableView.dataSource = dataSource
+    }
+    
+    func bindElements() {
+        viewModel.characters.bind { [weak self] characters in
+            guard let self = self else { return }
+            DispatchQueue.main.async { [weak self] in
+                self?.characterTableView.reloadData()
+            }
+        }
     }
 
 }

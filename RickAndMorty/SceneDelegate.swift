@@ -19,7 +19,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else {
             return
         }
-        let initViewController = MainNavigationController(rootViewController: MainViewController())
+        let networking = Networking()
+        let mainViewModel = MainViewModel(networking: networking)
+        let mainViewController = MainViewController(viewModel: mainViewModel)
+        let initViewController = MainNavigationController(rootViewController: mainViewController)
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = initViewController
         window?.makeKeyAndVisible()

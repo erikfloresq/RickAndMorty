@@ -31,8 +31,13 @@ class CharacterTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func setup() {
+    private func setup() {
         accessoryType = .disclosureIndicator
+    }
+    
+    func bindData(photo: String, name: String) {
+        //self.photo.image = UIImage(named: photo)
+        self.name.text = name
     }
 
 }

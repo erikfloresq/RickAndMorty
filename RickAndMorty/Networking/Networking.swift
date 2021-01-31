@@ -8,6 +8,10 @@
 import Foundation
 import Combine
 
+protocol NetworkingProtocol {
+    func request(url: String, completionHandler: @escaping (Result<[Character], Error>) -> Void)
+}
+
 enum NetworkingError: Error {
     case makeURL
     case request
@@ -15,7 +19,7 @@ enum NetworkingError: Error {
     case jsonDecoder
 }
 
-class Networking {
+class Networking: NetworkingProtocol {
     private let session = URLSession(configuration: .default)
     
     func request(url: String, completionHandler: @escaping (Result<[Character], Error>) -> Void) {
@@ -35,7 +39,7 @@ class Networking {
             case .failure(let error):
                 completionHandler(.failure(error))
             }
-        }
+        }.resume()
     }
     
     func decodeData(data: Data?) throws -> ResponseCharacter {

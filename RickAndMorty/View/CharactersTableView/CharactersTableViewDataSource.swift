@@ -8,9 +8,9 @@
 import UIKit
 
 class CharactersTableViewDataSource: NSObject, UITableViewDataSource {
-    let viewModel: CharactersTableViewModelProtocol
+    let viewModel: MainViewModelProtocol
     
-    init(viewModel: CharactersTableViewModelProtocol = CharactersTableViewModel()) {
+    init(viewModel: MainViewModelProtocol) {
         self.viewModel = viewModel
     }
     
@@ -23,6 +23,7 @@ class CharactersTableViewDataSource: NSObject, UITableViewDataSource {
         guard let cell = dequeueCell as? CharacterTableViewCell else {
             return UITableViewCell()
         }
+        cell.bindData(photo: "", name: viewModel.characters.value[indexPath.row].name)
         return cell
     }
 }

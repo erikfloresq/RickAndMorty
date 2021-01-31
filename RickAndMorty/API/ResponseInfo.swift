@@ -10,6 +10,6 @@ import Foundation
 struct ResponseInfo: Codable {
     let count: Int
     let pages: Int
-    let next: Int
-    let prev: Int?
+    let next: String
+    let prev: String?
 }
