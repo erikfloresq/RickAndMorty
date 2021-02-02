@@ -10,6 +10,7 @@ import Combine
 
 protocol NetworkingProtocol {
     func request(url: String, completionHandler: @escaping (Result<[Character], Error>) -> Void)
+    func simpleRequest(url: String, completionHandler: @escaping (Result<Data, Error>) -> Void)
 }
 
 enum NetworkingError: Error {
@@ -21,6 +22,24 @@ enum NetworkingError: Error {
 
 class Networking: NetworkingProtocol {
     private let session = URLSession(configuration: .default)
+    
+    func simpleRequest(url: String, completionHandler: @escaping (Result<Data, Error>) -> Void) {
+        guard let url = URL(string: url) else {
+            completionHandler(.failure(NetworkingError.makeURL))
+            return
+        }
+        session.dataTask(with: url) { (data, response, error) in
+            guard error == nil else {
+                completionHandler(.failure(NetworkingError.request))
+                return
+            }
+            guard let data = data else {
+                completionHandler(.failure(NetworkingError.data))
+                return
+            }
+            completionHandler(.success(data))
+        }.resume()
+    }
     
     func request(url: String, completionHandler: @escaping (Result<[Character], Error>) -> Void) {
         guard let url = URL(string: url) else {

@@ -25,6 +25,9 @@
 		084DC83125C230E200429400 /* ResponseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DC83025C230E200429400 /* ResponseInfo.swift */; };
 		084DC83625C2316600429400 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DC83525C2316600429400 /* Character.swift */; };
 		084DC83B25C2328200429400 /* ResponseCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DC83A25C2328200429400 /* ResponseCharacter.swift */; };
+		086DC8C725C8C9260073208F /* CharactersTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC8C625C8C9260073208F /* CharactersTableViewDelegate.swift */; };
+		086DC8DE25C8E5FC0073208F /* DetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086DC8DD25C8E5FC0073208F /* DetailView.xib */; };
+		086DC8E425C8E65D0073208F /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC8E325C8E65D0073208F /* DetailView.swift */; };
 		08A5008325C3935600E95520 /* CharactersTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A5008225C3935600E95520 /* CharactersTableViewDataSource.swift */; };
 		08E3AEE725C63E0600A4D941 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3AEE625C63E0600A4D941 /* MainViewModel.swift */; };
 		08E3AEF325C6407D00A4D941 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3AEF225C6407D00A4D941 /* Observable.swift */; };
@@ -72,6 +75,9 @@
 		084DC83025C230E200429400 /* ResponseInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseInfo.swift; sourceTree = "<group>"; };
 		084DC83525C2316600429400 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		084DC83A25C2328200429400 /* ResponseCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseCharacter.swift; sourceTree = "<group>"; };
+		086DC8C625C8C9260073208F /* CharactersTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharactersTableViewDelegate.swift; sourceTree = "<group>"; };
+		086DC8DD25C8E5FC0073208F /* DetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailView.xib; sourceTree = "<group>"; };
+		086DC8E325C8E65D0073208F /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		08A5008225C3935600E95520 /* CharactersTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersTableViewDataSource.swift; sourceTree = "<group>"; };
 		08E3AEE625C63E0600A4D941 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		08E3AEF225C6407D00A4D941 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
@@ -108,6 +114,7 @@
 				0846765A25C3856D0073E229 /* CharactersTableView.xib */,
 				084DC7FF25C228C200429400 /* CharactersTableView.swift */,
 				08A5008225C3935600E95520 /* CharactersTableViewDataSource.swift */,
+				086DC8C625C8C9260073208F /* CharactersTableViewDelegate.swift */,
 			);
 			path = CharactersTableView;
 			sourceTree = "<group>";
@@ -150,7 +157,6 @@
 				084DC7FE25C2288900429400 /* Resources */,
 				084DC7F925C2284E00429400 /* Model */,
 				084DC7F825C2284600429400 /* View */,
-				08E3AEE525C63DF700A4D941 /* ViewModel */,
 				084DC7F725C2283F00429400 /* Controller */,
 				084DC7C125C2263000429400 /* AppDelegate.swift */,
 				084DC7C325C2263000429400 /* SceneDelegate.swift */,
@@ -180,8 +186,8 @@
 		084DC7F725C2283F00429400 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				084DC7C525C2263000429400 /* MainViewController.swift */,
-				084DC80E25C22D2E00429400 /* DetailViewController.swift */,
+				086DC8D425C8D1730073208F /* DetailView */,
+				086DC8D325C8D1650073208F /* MainView */,
 				084DC81625C22D9D00429400 /* MainNavigationController.swift */,
 			);
 			path = Controller;
@@ -190,6 +196,7 @@
 		084DC7F825C2284600429400 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				086DC8E225C8E6450073208F /* DetailView */,
 				0846765825C385330073E229 /* CharactersTableView */,
 				0846765925C385400073E229 /* CharacterTableViewCell */,
 			);
@@ -231,12 +238,30 @@
 			path = API;
 			sourceTree = "<group>";
 		};
-		08E3AEE525C63DF700A4D941 /* ViewModel */ = {
+		086DC8D325C8D1650073208F /* MainView */ = {
 			isa = PBXGroup;
 			children = (
+				084DC7C525C2263000429400 /* MainViewController.swift */,
 				08E3AEE625C63E0600A4D941 /* MainViewModel.swift */,
 			);
-			path = ViewModel;
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		086DC8D425C8D1730073208F /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				084DC80E25C22D2E00429400 /* DetailViewController.swift */,
+			);
+			path = DetailView;
+			sourceTree = "<group>";
+		};
+		086DC8E225C8E6450073208F /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				086DC8DD25C8E5FC0073208F /* DetailView.xib */,
+				086DC8E325C8E65D0073208F /* DetailView.swift */,
+			);
+			path = DetailView;
 			sourceTree = "<group>";
 		};
 		08E3AEF125C6406A00A4D941 /* Utils */ = {
@@ -352,6 +377,7 @@
 			files = (
 				084DC7CE25C2263100429400 /* LaunchScreen.storyboard in Resources */,
 				0846766025C3858C0073E229 /* CharacterTableViewCell.xib in Resources */,
+				086DC8DE25C8E5FC0073208F /* DetailView.xib in Resources */,
 				084DC7CB25C2263100429400 /* Assets.xcassets in Resources */,
 				0846765B25C3856D0073E229 /* CharactersTableView.xib in Resources */,
 			);
@@ -380,6 +406,7 @@
 			files = (
 				084DC7C625C2263000429400 /* MainViewController.swift in Sources */,
 				084DC80025C228C200429400 /* CharactersTableView.swift in Sources */,
+				086DC8E425C8E65D0073208F /* DetailView.swift in Sources */,
 				084DC83B25C2328200429400 /* ResponseCharacter.swift in Sources */,
 				084DC83625C2316600429400 /* Character.swift in Sources */,
 				084DC83125C230E200429400 /* ResponseInfo.swift in Sources */,
@@ -392,6 +419,7 @@
 				084DC81725C22D9D00429400 /* MainNavigationController.swift in Sources */,
 				08A5008325C3935600E95520 /* CharactersTableViewDataSource.swift in Sources */,
 				084DC7C225C2263000429400 /* AppDelegate.swift in Sources */,
+				086DC8C725C8C9260073208F /* CharactersTableViewDelegate.swift in Sources */,
 				084DC7C425C2263000429400 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

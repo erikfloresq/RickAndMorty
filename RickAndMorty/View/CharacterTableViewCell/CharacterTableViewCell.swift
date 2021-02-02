@@ -35,9 +35,28 @@ class CharacterTableViewCell: UITableViewCell {
         accessoryType = .disclosureIndicator
     }
     
-    func bindData(photo: String, name: String) {
-        //self.photo.image = UIImage(named: photo)
+    func configure(photoUrl: String, name: String) {
+        setPhoto(from: photoUrl)
         self.name.text = name
+    }
+    
+    func setPhoto(from url: String) {
+        let networking = Networking()
+        let queue = DispatchQueue(label: "dev.erikflores.cellPhoto", attributes: .concurrent)
+        queue.async { [weak self] in
+            guard let self = self else { return }
+            networking.simpleRequest(url: url) { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success(let data):
+                    DispatchQueue.main.async {
+                        self.photo.image = UIImage(data: data)
+                    }
+                case .failure:
+                    print("asd")
+                }
+            }
+        }
     }
 
 }

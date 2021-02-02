@@ -11,7 +11,13 @@ import Combine
 class MainViewController: UIViewController {
     let viewModel: MainViewModelProtocol
     let characterTableView = CharactersTableView().loadFromNib()
-    lazy var dataSource = CharactersTableViewDataSource(viewModel: viewModel)
+    lazy var characterDataSource = CharactersTableViewDataSource(viewModel: viewModel)
+    lazy var characterDelegate = CharactersTableViewDelegate(viewModel: viewModel, navigation: navigationController)
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .medium)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        return activityIndicator
+    }()
     
     init(viewModel: MainViewModelProtocol) {
         self.viewModel = viewModel
@@ -27,23 +33,38 @@ class MainViewController: UIViewController {
         title = "Characters"
         view.backgroundColor = .systemBackground
         view = characterTableView
+        characterTableView.dataSource = characterDataSource
+        characterTableView.delegate = characterDelegate
+        addActivity()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.getCharacters()
         bindElements()
-        
-        characterTableView.dataSource = dataSource
+    }
+    
+    func addActivity() {
+        view.addSubview(activityIndicator)
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.topAnchor.constraint(equalTo: view.topAnchor, constant: 50)
+        ])
     }
     
     func bindElements() {
+        activityIndicator.startAnimating()
         viewModel.characters.bind { [weak self] characters in
             guard let self = self else { return }
             DispatchQueue.main.async { [weak self] in
+                self?.activityIndicator.stopAnimating()
                 self?.characterTableView.reloadData()
             }
         }
+    }
+    
+    deinit {
+        print("deinit MainViewController")
     }
 
 }

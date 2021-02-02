@@ -23,7 +23,8 @@ class CharactersTableViewDataSource: NSObject, UITableViewDataSource {
         guard let cell = dequeueCell as? CharacterTableViewCell else {
             return UITableViewCell()
         }
-        cell.bindData(photo: "", name: viewModel.characters.value[indexPath.row].name)
+        cell.configure(photoUrl: viewModel.characters.value[indexPath.row].image,
+                      name: viewModel.characters.value[indexPath.row].name)
         return cell
     }
 }
