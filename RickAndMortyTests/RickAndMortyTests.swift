@@ -18,11 +18,12 @@ class RickAndMortyTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testDataSource() throws {
-        let viewModel = CharactersTableViewModel()
-        let dataSource = CharactersTableViewDataSource(viewModel: viewModel)
-        let mainTableView = CharactersTableView()
-        XCTAssertEqual(dataSource.tableView(mainTableView, numberOfRowsInSection: 5), 5)
+    func testMainViewModel() throws {
+        let networkingMock = NetworkingMock()
+        let mainViewModel = MainViewModel(networking: networkingMock)
+        mainViewModel.getCharacters()
+        
+        XCTAssertEqual(mainViewModel.charactersCount(), 20)
     }
 
     func testPerformanceExample() throws {

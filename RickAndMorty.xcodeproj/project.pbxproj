@@ -31,6 +31,10 @@
 		08A5008325C3935600E95520 /* CharactersTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A5008225C3935600E95520 /* CharactersTableViewDataSource.swift */; };
 		08E3AEE725C63E0600A4D941 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3AEE625C63E0600A4D941 /* MainViewModel.swift */; };
 		08E3AEF325C6407D00A4D941 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3AEF225C6407D00A4D941 /* Observable.swift */; };
+		08F17EF125C9668A00F0163F /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F17EF025C9668A00F0163F /* DetailViewModel.swift */; };
+		08F17EF725C9678A00F0163F /* characters.json in Resources */ = {isa = PBXBuildFile; fileRef = 08F17EF625C9678A00F0163F /* characters.json */; };
+		08F17EFC25C967A300F0163F /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F17EFB25C967A300F0163F /* Mocks.swift */; };
+		08F17F0125C96BC500F0163F /* NetworkingMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F17F0025C96BC500F0163F /* NetworkingMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +85,10 @@
 		08A5008225C3935600E95520 /* CharactersTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersTableViewDataSource.swift; sourceTree = "<group>"; };
 		08E3AEE625C63E0600A4D941 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		08E3AEF225C6407D00A4D941 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		08F17EF025C9668A00F0163F /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		08F17EF625C9678A00F0163F /* characters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = characters.json; sourceTree = "<group>"; };
+		08F17EFB25C967A300F0163F /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
+		08F17F0025C96BC500F0163F /* NetworkingMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +176,7 @@
 		084DC7D725C2263100429400 /* RickAndMortyTests */ = {
 			isa = PBXGroup;
 			children = (
+				08F17EF525C966E800F0163F /* Mocks */,
 				084DC7D825C2263100429400 /* RickAndMortyTests.swift */,
 				084DC7DA25C2263100429400 /* Info.plist */,
 			);
@@ -251,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				084DC80E25C22D2E00429400 /* DetailViewController.swift */,
+				08F17EF025C9668A00F0163F /* DetailViewModel.swift */,
 			);
 			path = DetailView;
 			sourceTree = "<group>";
@@ -270,6 +280,16 @@
 				08E3AEF225C6407D00A4D941 /* Observable.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		08F17EF525C966E800F0163F /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				08F17EF625C9678A00F0163F /* characters.json */,
+				08F17EFB25C967A300F0163F /* Mocks.swift */,
+				08F17F0025C96BC500F0163F /* NetworkingMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -387,6 +407,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08F17EF725C9678A00F0163F /* characters.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +438,7 @@
 				08E3AEF325C6407D00A4D941 /* Observable.swift in Sources */,
 				084DC80F25C22D2E00429400 /* DetailViewController.swift in Sources */,
 				084DC81725C22D9D00429400 /* MainNavigationController.swift in Sources */,
+				08F17EF125C9668A00F0163F /* DetailViewModel.swift in Sources */,
 				08A5008325C3935600E95520 /* CharactersTableViewDataSource.swift in Sources */,
 				084DC7C225C2263000429400 /* AppDelegate.swift in Sources */,
 				086DC8C725C8C9260073208F /* CharactersTableViewDelegate.swift in Sources */,
@@ -429,6 +451,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				084DC7D925C2263100429400 /* RickAndMortyTests.swift in Sources */,
+				08F17EFC25C967A300F0163F /* Mocks.swift in Sources */,
+				08F17F0125C96BC500F0163F /* NetworkingMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
