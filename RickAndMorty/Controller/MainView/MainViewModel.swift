@@ -7,14 +7,14 @@
 
 import Foundation
 
-protocol MainViewModelProtocol {
+protocol MainViewModelable {
     var characters: Observable<[Character]> { get set }
     
     func charactersCount() -> Int
     func getCharacters()
 }
 
-class MainViewModel: MainViewModelProtocol {
+class MainViewModel: MainViewModelable {
     var characters: Observable<[Character]> = Observable<[Character]>([])
     private let networking: NetworkingProtocol
     

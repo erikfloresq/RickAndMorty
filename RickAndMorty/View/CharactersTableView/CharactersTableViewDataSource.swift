@@ -8,9 +8,9 @@
 import UIKit
 
 class CharactersTableViewDataSource: NSObject, UITableViewDataSource {
-    let viewModel: MainViewModelProtocol
+    let viewModel: MainViewModelable
     
-    init(viewModel: MainViewModelProtocol) {
+    init(viewModel: MainViewModelable) {
         self.viewModel = viewModel
     }
     

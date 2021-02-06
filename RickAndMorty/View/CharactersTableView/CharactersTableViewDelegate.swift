@@ -9,15 +9,15 @@ import UIKit
 
 class CharactersTableViewDelegate: NSObject, UITableViewDelegate {
     weak var navigation: UINavigationController?
-    let viewModel: MainViewModelProtocol
+    let viewModel: MainViewModelable
     
-    init(viewModel: MainViewModelProtocol, navigation: UINavigationController?) {
+    init(viewModel: MainViewModelable, navigation: UINavigationController?) {
         self.viewModel = viewModel
         self.navigation = navigation
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailViewModel = DetailViewModel(image: viewModel.characters.value[indexPath.row].image)
+        let detailViewModel = DetailViewModel(character: viewModel.characters.value[indexPath.row])
         let detailVC = DetailViewController(viewModel: detailViewModel)
         navigation?.showDetailViewController(detailVC, sender: nil)
     }

@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 class MainViewController: UIViewController {
-    let viewModel: MainViewModelProtocol
+    let viewModel: MainViewModelable
     let characterTableView = CharactersTableView().loadFromNib()
     lazy var characterDataSource = CharactersTableViewDataSource(viewModel: viewModel)
     lazy var characterDelegate = CharactersTableViewDelegate(viewModel: viewModel, navigation: navigationController)
@@ -19,7 +19,7 @@ class MainViewController: UIViewController {
         return activityIndicator
     }()
     
-    init(viewModel: MainViewModelProtocol) {
+    init(viewModel: MainViewModelable) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
