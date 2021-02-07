@@ -31,9 +31,13 @@ class MainViewModel: MainViewModelable {
             switch result {
             case .success(let characters):
                 self.characters.value = characters
-            case .failure(let error):
-                print(error.localizedDescription)
+            case .failure:
+                self.characters.value = []
             }
         }
+    }
+    
+    deinit {
+        print("deinit MainViewModel")
     }
 }

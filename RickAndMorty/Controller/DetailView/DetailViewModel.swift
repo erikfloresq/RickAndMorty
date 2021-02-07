@@ -67,7 +67,7 @@ class DetailViewModel: DetailViewModelable  {
     
     
     deinit {
-        assert(true, "deinit DetailViewModel")
+        print("deinit DetailViewModel")
     }
     
 }

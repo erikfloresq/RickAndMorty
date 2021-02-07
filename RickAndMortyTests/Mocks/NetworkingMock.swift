@@ -12,9 +12,17 @@ class NetworkingMock: NetworkingProtocol {
     enum NetworkingMockError: Error {
         case noData
     }
+    let okStatus: Bool
+    
+    init(okStatus: Bool) {
+        self.okStatus = okStatus
+    }
     
     func request(url: String, completionHandler: @escaping (Result<[Character], Error>) -> Void) {
-        let mock: ResponseCharacter? = Mocks.readJSON(name: "characters")
+        var mock: ResponseCharacter?
+        if okStatus {
+            mock = Mocks.readJSON(name: "characters")
+        }
         guard let characters = mock?.results else {
             completionHandler(.failure(NetworkingMockError.noData))
             return

@@ -18,18 +18,25 @@ class RickAndMortyTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testMainViewModel() throws {
-        let networkingMock = NetworkingMock()
+    func testCharactersCount() throws {
+        let networkingMock = NetworkingMock(okStatus: true)
         let mainViewModel = MainViewModel(networking: networkingMock)
         mainViewModel.getCharacters()
         
         XCTAssertEqual(mainViewModel.charactersCount(), 20)
     }
+    
+    func testCharactersCountEmpty() throws {
+        let networkingMock = NetworkingMock(okStatus: false)
+        let mainViewModel = MainViewModel(networking: networkingMock)
+        mainViewModel.getCharacters()
+        
+        XCTAssertEqual(mainViewModel.charactersCount(), 0)
+    }
 
     func testPerformanceExample() throws {
-        // This is an example of a performance test case.
         self.measure {
-            // Put the code you want to measure the time of here.
+            
         }
     }
 

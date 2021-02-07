@@ -82,7 +82,7 @@ class DetailViewController: UIViewController {
     }
     
     deinit {
-        assert(true, "deinit DetailViewController")
+        print("deinit DetailViewController")
     }
 
 }
