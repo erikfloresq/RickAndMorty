@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 @testable import RickAndMorty
 
 class NetworkingMock: NetworkingProtocol {
@@ -31,6 +32,15 @@ class NetworkingMock: NetworkingProtocol {
     }
     
     func simpleRequest(url: String, completionHandler: @escaping (Result<Data, Error>) -> Void) {
-        
+        if okStatus {
+            completionHandler(.failure(NetworkingMockError.noData))
+            return
+        }
+        let image = UIImage(named: "mockImage")
+        guard let data = image?.cgImage?.dataProvider?.data as Data? else {
+            completionHandler(.failure(NetworkingMockError.noData))
+            return
+        }
+        completionHandler(.success(data))
     }
 }

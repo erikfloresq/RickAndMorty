@@ -47,8 +47,8 @@ class DetailViewModel: DetailViewModelable  {
             switch result {
             case .success(let data):
                 self.heroImageData.value = data
-            case .failure(let error):
-                print("error \(error)")
+            case .failure:
+                self.heroImageData.value = nil
             }
         }
     }
