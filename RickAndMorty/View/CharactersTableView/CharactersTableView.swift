@@ -27,6 +27,7 @@ class CharactersTableView: UITableView {
     
     private func setup() {
         registerCell()
+        accessibilityIdentifier = "CharactersTableView"
     }
     
     private func registerCell() {

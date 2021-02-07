@@ -23,6 +23,7 @@ class CharactersTableViewDataSource: NSObject, UITableViewDataSource {
         guard let cell = dequeueCell as? CharacterTableViewCell else {
             return UITableViewCell()
         }
+        cell.accessibilityIdentifier = "CharacterTableViewCell_\(indexPath.row)"
         cell.configure(photoUrl: viewModel.characters.value[indexPath.row].image,
                       name: viewModel.characters.value[indexPath.row].name)
         return cell
