@@ -53,7 +53,6 @@ class MainViewController: UIViewController {
     }
     
     func bindElements() {
-        //characterDataSource.update(with: [])
         activityIndicator.startAnimating()
         viewModel.characters.bind { [weak self] characters in
             guard let self = self else { return }
