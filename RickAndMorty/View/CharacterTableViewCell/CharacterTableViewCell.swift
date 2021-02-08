@@ -17,6 +17,8 @@ class CharacterTableViewCell: UITableViewCell {
     }
     @IBOutlet weak var name: UILabel!
     
+    static let identifier = "CharacterTableViewCell"
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setup()
@@ -33,6 +35,15 @@ class CharacterTableViewCell: UITableViewCell {
     
     private func setup() {
         accessoryType = .disclosureIndicator
+    }
+    
+    override func updateConfiguration(using state: UICellConfigurationState) {
+        super.updateConfiguration(using: state)
+        var contentConfig = defaultContentConfiguration().updated(for: state)
+        contentConfig.text = "demo"
+        //contentConfig.image = UIImage(named: "")
+
+        self.contentConfiguration = contentConfig
     }
     
     func configure(photoUrl: String, name: String) {

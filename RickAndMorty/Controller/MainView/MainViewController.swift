@@ -11,7 +11,7 @@ import Combine
 class MainViewController: UIViewController {
     let viewModel: MainViewModelable
     let characterTableView = CharactersTableView().loadFromNib()
-    lazy var characterDataSource = CharactersTableViewDataSource(viewModel: viewModel)
+    lazy var characterDataSource = CharactersTableViewDataSource(tableView: characterTableView)
     lazy var characterDelegate = CharactersTableViewDelegate(viewModel: viewModel, navigation: navigationController)
     lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .medium)
@@ -33,7 +33,7 @@ class MainViewController: UIViewController {
         title = "Characters"
         view.backgroundColor = .systemBackground
         view = characterTableView
-        characterTableView.dataSource = characterDataSource
+        characterTableView.dataSource = characterDataSource.dataSource
         characterTableView.delegate = characterDelegate
         addActivity()
     }
@@ -53,12 +53,14 @@ class MainViewController: UIViewController {
     }
     
     func bindElements() {
+        //characterDataSource.update(with: [])
         activityIndicator.startAnimating()
         viewModel.characters.bind { [weak self] characters in
             guard let self = self else { return }
             DispatchQueue.main.async { [weak self] in
-                self?.activityIndicator.stopAnimating()
-                self?.characterTableView.reloadData()
+                guard let self = self else { return }
+                self.activityIndicator.stopAnimating()
+                self.characterDataSource.update(with: characters)
             }
         }
     }
