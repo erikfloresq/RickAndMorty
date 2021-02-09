@@ -26,6 +26,10 @@ class MainViewModel: MainViewModelable {
         return characters.value.count
     }
     
+    func getCharacter(indexPath: IndexPath) -> Character {
+        return characters.value[indexPath.row]
+    }
+    
     func getCharacters() {
         networking.request(url: RickAndMortyAPI.characters) { result in
             switch result {

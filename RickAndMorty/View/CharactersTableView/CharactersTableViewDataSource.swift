@@ -8,6 +8,7 @@
 import UIKit
 
 class CharactersTableViewDataSource {
+    typealias CellProvider = (UITableView, IndexPath, Character) -> UITableViewCell?
     enum Sections: CaseIterable {
         case characters
     }
@@ -16,18 +17,25 @@ class CharactersTableViewDataSource {
     
     init(tableView: UITableView) {
         self.tableView = tableView
-        dataSource = UITableViewDiffableDataSource<Sections, Character>(tableView: tableView,
-                                                   cellProvider: { (tableView, indexPath, character) -> UITableViewCell? in
-                        let dequeueCell = tableView.dequeueReusableCell(withIdentifier: "CharacterTableViewCell", for: indexPath) as! CharacterTableViewCell
-                                                                return dequeueCell
-        })
+        let cellProvider: CellProvider = { tableView, indexPath, character in
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CharacterTableViewCell",
+                                                 for: indexPath)
+            var contentConfig = CharacterContentConfiguration()
+            contentConfig.name = character.name
+            contentConfig.url = character.image
+            cell.contentConfiguration = contentConfig
+            cell.accessibilityIdentifier = "CharacterTableViewCell_\(indexPath.row)"
+            return cell
+        }
+        dataSource = UITableViewDiffableDataSource(tableView: tableView,
+                                                   cellProvider: cellProvider)
     }
     
     func update(with list:[Character]) {
         var snapshot = NSDiffableDataSourceSnapshot<Sections, Character>()
         snapshot.appendSections(Sections.allCases)
         snapshot.appendItems(list, toSection: .characters)
-        dataSource.apply(snapshot)
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
     
 }

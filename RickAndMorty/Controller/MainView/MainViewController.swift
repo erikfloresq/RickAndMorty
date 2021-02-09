@@ -10,7 +10,7 @@ import Combine
 
 class MainViewController: UIViewController {
     let viewModel: MainViewModelable
-    let characterTableView = CharactersTableView().loadFromNib()
+    let characterTableView = CharactersTableView()
     lazy var characterDataSource = CharactersTableViewDataSource(tableView: characterTableView)
     lazy var characterDelegate = CharactersTableViewDelegate(viewModel: viewModel, navigation: navigationController)
     lazy var activityIndicator: UIActivityIndicatorView = {
