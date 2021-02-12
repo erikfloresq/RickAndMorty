@@ -29,7 +29,6 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.getPhoto()
-        viewModel.getValues()
         bind()
     }
     
@@ -45,39 +44,15 @@ class DetailViewController: UIViewController {
             }
         }
         
-        viewModel.name.bind { [weak self] name in
-            guard let self = self else { return }
-            self.detailView.nameLabel.text = name
-        }
-        
-        viewModel.status.bind { [weak self] status in
-            guard let self = self else { return }
-            self.detailView.statusLabel.text = status
-        }
-        
-        viewModel.species.bind { [weak self] species in
-            guard let self = self else { return }
-            self.detailView.speciesLabel.text = species
-        }
-        
-        viewModel.gender.bind { [weak self] gender in
-            guard let self = self else { return }
-            self.detailView.genderLabel.text = gender
-        }
-        
-        viewModel.originName.bind { [weak self] originName in
-            guard let self = self else { return }
-            self.detailView.originLabel.text = originName
-        }
-        
-        viewModel.locationName.bind { [weak self] locationName in
-            guard let self = self else { return }
-            self.detailView.locationLabel.text = locationName
-        }
-        
-        viewModel.episodes.bind { [weak self] episodes in
-            guard let self = self else { return }
-            self.detailView.episodeLabel.text = episodes
+        viewModel.character.bind { [weak self] character in
+            guard let self = self, let character = character else { return }
+            self.detailView.nameLabel.text = character.name
+            self.detailView.statusLabel.text = character.status
+            self.detailView.speciesLabel.text = character.species
+            self.detailView.genderLabel.text = character.gender
+            self.detailView.originLabel.text = character.origin.name
+            self.detailView.locationLabel.text = character.location.name
+            self.detailView.episodeLabel.text = String(character.episode.count)
         }
     }
     

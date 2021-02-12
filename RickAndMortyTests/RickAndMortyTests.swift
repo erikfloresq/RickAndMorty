@@ -40,14 +40,8 @@ class RickAndMortyTests: XCTestCase {
         mainViewModel.getCharacters()
         let character = try XCTUnwrap(mainViewModel.characters.value.first, "Character nil")
         let detailViewModel = DetailViewModel(character: character, networking: networkingMock)
-        detailViewModel.getValues()
         
-        XCTAssertEqual(detailViewModel.name.value, character.name)
-        XCTAssertEqual(detailViewModel.status.value, character.status)
-        XCTAssertEqual(detailViewModel.species.value, character.species)
-        XCTAssertEqual(detailViewModel.gender.value, character.gender)
-        XCTAssertEqual(detailViewModel.originName.value, character.origin.name)
-        XCTAssertEqual(detailViewModel.locationName.value, character.location.name)
+        XCTAssertEqual(detailViewModel.character.value, character)
     }
     
     func testDetailViewController() throws {
