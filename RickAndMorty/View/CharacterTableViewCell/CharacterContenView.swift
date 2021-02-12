@@ -29,10 +29,16 @@ class CharacterContentView: UIView, UIContentView {
         stackContainer.spacing = 10
         return stackContainer
     }()
-    var configuration: UIContentConfiguration
+    var configuration: UIContentConfiguration {
+        get { appliedConfiguration }
+        set {
+            guard let newConfig = newValue as? CharacterContentConfiguration else { return }
+            configure(configuration: newConfig)
+        }
+    }
+    private var appliedConfiguration: CharacterContentConfiguration!
     
-    init(_ configuration: UIContentConfiguration) {
-        self.configuration = configuration
+    init(_ configuration: CharacterContentConfiguration) {
         super.init(frame: .zero)
         addCustomView()
         configure(configuration: configuration)
@@ -62,8 +68,11 @@ class CharacterContentView: UIView, UIContentView {
         NSLayoutConstraint.activate(constraints)
     }
     
-    func configure(configuration: UIContentConfiguration) {
-        guard let configuration = configuration as? CharacterContentConfiguration else { return }
+    func configure(configuration: CharacterContentConfiguration) {
+        guard appliedConfiguration != configuration else {
+            return
+        }
+        appliedConfiguration = configuration
         self.name.text = configuration.name
         setPhoto(from: configuration.url)
     }

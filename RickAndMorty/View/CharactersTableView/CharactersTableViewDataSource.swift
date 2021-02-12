@@ -35,7 +35,7 @@ class CharactersTableViewDataSource {
         var snapshot = NSDiffableDataSourceSnapshot<Sections, Character>()
         snapshot.appendSections(Sections.allCases)
         snapshot.appendItems(list, toSection: .characters)
-        dataSource.apply(snapshot, animatingDifferences: false)
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
     
 }

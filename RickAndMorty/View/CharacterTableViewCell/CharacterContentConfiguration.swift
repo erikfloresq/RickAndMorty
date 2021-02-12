@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct CharacterContentConfiguration: UIContentConfiguration {
+struct CharacterContentConfiguration: UIContentConfiguration, Hashable {
     var name = ""
     var url: String = ""
     
