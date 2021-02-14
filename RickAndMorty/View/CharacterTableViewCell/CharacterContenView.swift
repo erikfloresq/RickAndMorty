@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class CharacterContentView: UIView, UIContentView {
     lazy var photo: UIImageView = {
@@ -37,6 +38,7 @@ class CharacterContentView: UIView, UIContentView {
         }
     }
     private var appliedConfiguration: CharacterContentConfiguration!
+    var cancellable = Set<AnyCancellable>()
     
     init(_ configuration: CharacterContentConfiguration) {
         super.init(frame: .zero)
@@ -82,17 +84,18 @@ class CharacterContentView: UIView, UIContentView {
         let queue = DispatchQueue(label: "dev.erikflores.cellPhoto", attributes: .concurrent)
         queue.async { [weak self] in
             guard let self = self else { return }
-            networking.simpleRequest(url: url) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let data):
-                    DispatchQueue.main.async {
-                        self.photo.image = UIImage(data: data)
-                    }
+            networking.simpleRequest(url: url).sink { completion in
+                switch completion {
                 case .failure:
-                    print("asd")
+                    print("")
+                case .finished:
+                    print("")
                 }
-            }
+            } receiveValue: { data in
+                DispatchQueue.main.async {
+                    self.photo.image = UIImage(data: data)
+                }
+            }.store(in: &self.cancellable)
         }
     }
 }

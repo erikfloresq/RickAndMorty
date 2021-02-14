@@ -17,8 +17,9 @@ class CharactersTableViewDelegate: NSObject, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailViewModel = DetailViewModel(character: viewModel.characters.value[indexPath.row])
-        let detailVC = DetailViewController(viewModel: detailViewModel)
-        navigation?.showDetailViewController(detailVC, sender: nil)
+        
+//        let detailViewModel = DetailViewModel(character: viewModel.characters[indexPath.row])
+//        let detailVC = DetailViewController(viewModel: detailViewModel)
+//        navigation?.showDetailViewController(detailVC, sender: nil)
     }
 }

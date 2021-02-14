@@ -18,6 +18,7 @@ class MainViewController: UIViewController {
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         return activityIndicator
     }()
+    var cancellable = Set<AnyCancellable>()
     
     init(viewModel: MainViewModelable) {
         self.viewModel = viewModel
@@ -54,14 +55,21 @@ class MainViewController: UIViewController {
     
     func bindElements() {
         activityIndicator.startAnimating()
-        viewModel.characters.bind { [weak self] characters in
-            guard let self = self else { return }
+        viewModel.characters.sink { completion in
+            switch completion {
+            case .failure(let error):
+                print(error)
+            case .finished:
+                print("finished")
+            }
+        } receiveValue: { characters in
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.activityIndicator.stopAnimating()
                 self.characterDataSource.update(with: characters)
             }
-        }
+        }.store(in: &cancellable)
+
     }
     
     deinit {
