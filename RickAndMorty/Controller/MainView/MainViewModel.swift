@@ -13,13 +13,13 @@ enum MainViewModelError: Error {
 }
 
 protocol MainViewModelable {
-    var characters: PassthroughSubject<[Character], MainViewModelError> { get set }
+    var characters: CurrentValueSubject<[Character], MainViewModelError> { get set }
     func getCharacters()
 }
 
 class MainViewModel: MainViewModelable {
     private let networking: NetworkingProtocol
-    var characters = PassthroughSubject<[Character], MainViewModelError>()
+    var characters = CurrentValueSubject<[Character], MainViewModelError>([])
     var cancellable = Set<AnyCancellable>()
     
     init(networking: NetworkingProtocol) {
@@ -33,7 +33,7 @@ class MainViewModel: MainViewModelable {
                 case .failure:
                     self.characters.send(completion: .failure(.request))
                 case .finished:
-                    print("request finished")
+                    self.characters.send(completion: .finished)
                 }
             } receiveValue: { (characters) in
                 self.characters.send(characters)

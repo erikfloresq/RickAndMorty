@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Combine
 
 class DetailViewController: UIViewController {
     let detailView = DetailView().loadFromNib()
     let viewModel: DetailViewModelable
+    var cancellable = Set<AnyCancellable>()
     
     init(viewModel: DetailViewModelable) {
         self.viewModel = viewModel
@@ -33,27 +35,28 @@ class DetailViewController: UIViewController {
     }
     
     func bind() {
-        viewModel.heroImageData.bind { [weak self] heroImageData in
-            guard let self = self else { return }
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self,
-                      let heroImageData = heroImageData else {
-                    return
+        viewModel
+            .heroImageData
+            .receive(on: RunLoop.main)
+            .sink { completion in
+                switch completion {
+                case .failure(let error):
+                    print(error)
+                case .finished:
+                    print("finished")
                 }
+            } receiveValue: { heroImageData in
                 self.detailView.heroImage.image = UIImage(data: heroImageData)
-            }
-        }
-        
-        viewModel.character.bind { [weak self] character in
-            guard let self = self, let character = character else { return }
-            self.detailView.nameLabel.text = character.name
-            self.detailView.statusLabel.text = character.status
-            self.detailView.speciesLabel.text = character.species
-            self.detailView.genderLabel.text = character.gender
-            self.detailView.originLabel.text = character.origin.name
-            self.detailView.locationLabel.text = character.location.name
-            self.detailView.episodeLabel.text = String(character.episode.count)
-        }
+            }.store(in: &cancellable)
+
+        let character = viewModel.character
+        self.detailView.nameLabel.text = character.name
+        self.detailView.statusLabel.text = character.status
+        self.detailView.speciesLabel.text = character.species
+        self.detailView.genderLabel.text = character.gender
+        self.detailView.originLabel.text = character.origin.name
+        self.detailView.locationLabel.text = character.location.name
+        self.detailView.episodeLabel.text = String(character.episode.count)
     }
     
     deinit {

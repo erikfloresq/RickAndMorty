@@ -6,20 +6,22 @@
 //
 
 import UIKit
+import Combine
+
+enum CharacterDelegateError: Error {
+    case didSelected
+}
 
 class CharactersTableViewDelegate: NSObject, UITableViewDelegate {
     weak var navigation: UINavigationController?
     let viewModel: MainViewModelable
+    var selectAction = PassthroughSubject<Character, Never>()
     
-    init(viewModel: MainViewModelable, navigation: UINavigationController?) {
+    init(viewModel: MainViewModelable) {
         self.viewModel = viewModel
-        self.navigation = navigation
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-//        let detailViewModel = DetailViewModel(character: viewModel.characters[indexPath.row])
-//        let detailVC = DetailViewController(viewModel: detailViewModel)
-//        navigation?.showDetailViewController(detailVC, sender: nil)
+        selectAction.send(viewModel.characters.value[indexPath.row])
     }
 }

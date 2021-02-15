@@ -12,13 +12,14 @@ class MainViewController: UIViewController {
     let viewModel: MainViewModelable
     let characterTableView = CharactersTableView()
     lazy var characterDataSource = CharactersTableViewDataSource(tableView: characterTableView)
-    lazy var characterDelegate = CharactersTableViewDelegate(viewModel: viewModel, navigation: navigationController)
+    lazy var characterDelegate = CharactersTableViewDelegate(viewModel: viewModel)
     lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .medium)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         return activityIndicator
     }()
     var cancellable = Set<AnyCancellable>()
+    var tableViewAction = PassthroughSubject<Character, Never>()
     
     init(viewModel: MainViewModelable) {
         self.viewModel = viewModel
@@ -42,7 +43,8 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.getCharacters()
-        bindElements()
+        bindData()
+        bindActions()
     }
     
     func addActivity() {
@@ -53,23 +55,29 @@ class MainViewController: UIViewController {
         ])
     }
     
-    func bindElements() {
+    func bindData() {
         activityIndicator.startAnimating()
-        viewModel.characters.sink { completion in
-            switch completion {
-            case .failure(let error):
-                print(error)
-            case .finished:
-                print("finished")
-            }
-        } receiveValue: { characters in
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
+        viewModel.characters
+            .receive(on: RunLoop.main)
+            .sink { completion in
+                switch completion {
+                case .failure(let error):
+                    print(error)
+                case .finished:
+                    print("finished")
+                }
+            } receiveValue: { characters in
                 self.activityIndicator.stopAnimating()
                 self.characterDataSource.update(with: characters)
-            }
+            }.store(in: &cancellable)
+    }
+    
+    func bindActions() {
+        characterDelegate.selectAction.sink { character in
+            let detailViewModel = DetailViewModel(character: character)
+            let detailViewController = DetailViewController(viewModel: detailViewModel)
+            self.navigationController?.showDetailViewController(detailViewController, sender: nil)
         }.store(in: &cancellable)
-
     }
     
     deinit {

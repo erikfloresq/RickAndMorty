@@ -6,49 +6,43 @@
 //
 
 import Foundation
+import Combine
+
+enum DetailViewModelError: Error {
+    case getPhoto
+}
 
 protocol DetailViewModelable {
     func getPhoto()
-    var character: Observable<Character?> { get set }
-    var heroImageData: Observable<Data?> { get set }
+    var heroImageData: PassthroughSubject<Data, DetailViewModelError> { get set }
+    var character: Character { get set }
 }
 
-class DetailViewModel: DetailViewModelable  {
+class DetailViewModel: NSObject, DetailViewModelable  {
     let networking: NetworkingProtocol
-    var character: Observable<Character?> = Observable<Character?>(nil)
-    var heroImageData: Observable<Data?> = Observable<Data?>(nil)
-    //var cancellable: Set<AnyCancellable>()
+    var heroImageData =  PassthroughSubject<Data, DetailViewModelError>()
+    var cancellable = Set<AnyCancellable>()
+    var character: Character
     
     init(character: Character, networking: NetworkingProtocol = Networking()) {
-        self.character.value = character
+        self.character = character
         self.networking = networking
     }
     
     func getPhoto() {
-//        guard let imageURL = character.value?.image else {
-//            return
-//        }
-//        networking.simpleRequest(url: imageURL) { [weak self] result in
-//            guard let self = self else { return }
-//            switch result {
-//            case .success(let data):
-//                self.heroImageData.value = data
-//            case .failure:
-//                self.heroImageData.value = nil
-//            }
-//        }
-//        networking.simpleRequest(url: imageURL).sink { completion in
-//            switch completion {
-//            case .failure:
-//                self.heroImageData
-//            case .finished:
-//                print("finished")
-//            }
-//        } receiveValue: { (<#Data#>) in
-//            <#code#>
-//        }
+        let imageURL = character.image
+        networking.simpleRequest(url: imageURL)
+            .sink { completion in
+                switch completion {
+                case .failure:
+                    self.heroImageData.send(completion: .failure(.getPhoto))
+                case .finished:
+                    self.heroImageData.send(completion: .finished)
+                }
+            } receiveValue: { data in
+                self.heroImageData.send(data)
+            }.store(in: &cancellable)
     }
-    
     
     deinit {
         print("deinit DetailViewModel")
