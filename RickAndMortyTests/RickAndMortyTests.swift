@@ -23,7 +23,7 @@ class RickAndMortyTests: XCTestCase {
         let mainViewModel = MainViewModel(networking: networkingMock)
         mainViewModel.getCharacters()
         
-        XCTAssertEqual(mainViewModel.charactersCount(), 20)
+        XCTAssertEqual(mainViewModel.characters.value.count, 20)
     }
     
     func testCharactersCountEmpty() throws {
@@ -31,7 +31,7 @@ class RickAndMortyTests: XCTestCase {
         let mainViewModel = MainViewModel(networking: networkingMock)
         mainViewModel.getCharacters()
         
-        XCTAssertEqual(mainViewModel.charactersCount(), 0)
+        XCTAssertEqual(mainViewModel.characters.value.count, 0)
     }
     
     func testDetailSetData() throws {
@@ -41,7 +41,7 @@ class RickAndMortyTests: XCTestCase {
         let character = try XCTUnwrap(mainViewModel.characters.value.first, "Character nil")
         let detailViewModel = DetailViewModel(character: character, networking: networkingMock)
         
-        XCTAssertEqual(detailViewModel.character.value, character)
+        XCTAssertEqual(detailViewModel.character, character)
     }
     
     func testDetailViewController() throws {

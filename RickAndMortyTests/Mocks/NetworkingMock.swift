@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 @testable import RickAndMorty
 
 class NetworkingMock: NetworkingProtocol {
@@ -19,28 +20,31 @@ class NetworkingMock: NetworkingProtocol {
         self.okStatus = okStatus
     }
     
-    func request(url: String, completionHandler: @escaping (Result<[Character], Error>) -> Void) {
+    func request(url: String) -> AnyPublisher<[Character], NetworkingError> {
+        let mockPublisher = CurrentValueSubject<[Character], NetworkingError>([])
         var mock: ResponseCharacter?
         if okStatus {
             mock = Mocks.readJSON(name: "characters")
         }
         guard let characters = mock?.results else {
-            completionHandler(.failure(NetworkingMockError.noData))
-            return
+            mockPublisher.send(completion: .failure(.data))
+            return mockPublisher.eraseToAnyPublisher()
         }
-        completionHandler(.success(characters))
+        mockPublisher.send(characters)
+        return mockPublisher.eraseToAnyPublisher()
     }
     
-    func simpleRequest(url: String, completionHandler: @escaping (Result<Data, Error>) -> Void) {
+    func simpleRequest(url: String) -> AnyPublisher<Data, NetworkingError> {
+        let mockPublisher = CurrentValueSubject<Data, NetworkingError>(Data())
         if okStatus {
-            completionHandler(.failure(NetworkingMockError.noData))
-            return
+            mockPublisher.send(completion: .failure(NetworkingError.data))
         }
         let image = UIImage(named: "mockImage")
         guard let data = image?.cgImage?.dataProvider?.data as Data? else {
-            completionHandler(.failure(NetworkingMockError.noData))
-            return
+            mockPublisher.send(completion: .failure(NetworkingError.data))
+            return mockPublisher.eraseToAnyPublisher()
         }
-        completionHandler(.success(data))
+        mockPublisher.send(data)
+        return mockPublisher.eraseToAnyPublisher()
     }
 }
