@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import Combine
 @testable import RickAndMorty
 
 class RickAndMortyTests: XCTestCase {
@@ -32,6 +33,19 @@ class RickAndMortyTests: XCTestCase {
         mainViewModel.getCharacters()
         
         XCTAssertEqual(mainViewModel.characters.value.count, 0)
+    }
+    
+    func testDidSelected() throws {
+        var cancellable = Set<AnyCancellable>()
+        let networkingMock = NetworkingMock(okStatus: true)
+        let mainViewModel = MainViewModel(networking: networkingMock)
+        mainViewModel.getCharacters()
+        let tableViewDelegate = CharactersTableViewDelegate(viewModel: mainViewModel)
+        let tableView = CharactersTableView()
+        tableViewDelegate.selectAction.sink { character in
+            XCTAssertEqual(character, mainViewModel.characters.value[1])
+        }.store(in: &cancellable)
+        tableViewDelegate.tableView(tableView, didSelectRowAt: IndexPath(row: 1, section: 0))
     }
     
     func testDetailSetData() throws {

@@ -33,7 +33,9 @@ class CharacterContentView: UIView, UIContentView {
     var configuration: UIContentConfiguration {
         get { appliedConfiguration }
         set {
-            guard let newConfig = newValue as? CharacterContentConfiguration else { return }
+            guard let newConfig = newValue as? CharacterContentConfiguration else {
+                return
+            }
             configure(configuration: newConfig)
         }
     }
@@ -47,7 +49,7 @@ class CharacterContentView: UIView, UIContentView {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        return nil
     }
     
     func makeCustomView() -> UIStackView {
