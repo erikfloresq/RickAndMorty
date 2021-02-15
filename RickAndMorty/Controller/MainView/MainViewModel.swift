@@ -39,8 +39,4 @@ class MainViewModel: MainViewModelable {
                 self.characters.send(characters)
             }.store(in: &cancellable)
     }
-    
-    deinit {
-        print("deinit MainViewModel")
-    }
 }

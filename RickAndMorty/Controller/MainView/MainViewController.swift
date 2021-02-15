@@ -27,7 +27,7 @@ class MainViewController: UIViewController {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        return nil
     }
     
     override func loadView() {
@@ -64,7 +64,7 @@ class MainViewController: UIViewController {
                 case .failure(let error):
                     print(error)
                 case .finished:
-                    print("finished")
+                    break
                 }
             } receiveValue: { characters in
                 self.activityIndicator.stopAnimating()
@@ -78,10 +78,6 @@ class MainViewController: UIViewController {
             let detailViewController = DetailViewController(viewModel: detailViewModel)
             self.navigationController?.showDetailViewController(detailViewController, sender: nil)
         }.store(in: &cancellable)
-    }
-    
-    deinit {
-        print("deinit MainViewController")
     }
 
 }
