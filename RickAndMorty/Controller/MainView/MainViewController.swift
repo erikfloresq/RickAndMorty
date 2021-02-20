@@ -10,8 +10,9 @@ import Combine
 
 class MainViewController: UIViewController {
     let viewModel: MainViewModelable
-    let characterTableView = CharactersTableView()
-    lazy var characterDataSource = CharactersTableViewDataSource(tableView: characterTableView)
+    //let characterTableView = CharactersTableView()
+    lazy var characterCollectionView = CharactersCollectionView()
+    lazy var characterDataSource = CharacterCollectionViewDataSource(collectionView: characterCollectionView)
     lazy var characterDelegate = CharactersTableViewDelegate(viewModel: viewModel)
     lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .medium)
@@ -34,9 +35,9 @@ class MainViewController: UIViewController {
         super.loadView()
         title = "Characters"
         view.backgroundColor = .systemBackground
-        view = characterTableView
-        characterTableView.dataSource = characterDataSource.dataSource
-        characterTableView.delegate = characterDelegate
+        view = characterCollectionView
+        //characterCollectionView.dataSource = characterDataSource.dataSource
+        //characterTableView.delegate = characterDelegate
         addActivity()
     }
 
