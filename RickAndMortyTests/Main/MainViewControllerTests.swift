@@ -29,12 +29,12 @@ class MainViewControllerTests: XCTestCase {
         let networkingMock = NetworkingMock(okStatus: true)
         let mainViewModel = MainViewModel(networking: networkingMock)
         mainViewModel.getCharacters()
-        let tableViewDelegate = CharactersTableViewDelegate(viewModel: mainViewModel)
-        let tableView = CharactersTableView()
-        tableViewDelegate.selectAction.sink { character in
+        let collectionViewDelegate = CharactersCollectionViewDelegate(viewModel: mainViewModel)
+        let collectionView = CharactersCollectionView()
+        collectionViewDelegate.selectAction.sink { character in
             XCTAssertEqual(character, mainViewModel.characters.value[1])
         }.store(in: &cancellable)
-        tableViewDelegate.tableView(tableView, didSelectRowAt: IndexPath(row: 1, section: 0))
+        collectionViewDelegate.collectionView(collectionView, didSelectItemAt: IndexPath(row: 1, section: 0))
     }
     
     func testCharacterContentView() {

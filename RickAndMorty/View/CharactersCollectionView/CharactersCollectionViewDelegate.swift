@@ -1,8 +1,8 @@
 //
-//  CharactersTableViewDelegate.swift
+//  CharactersCollectionViewDelegate.swift
 //  RickAndMorty
 //
-//  Created by Erik Flores on 1/02/21.
+//  Created by Erik Flores on 21/02/21.
 //
 
 import UIKit
@@ -12,7 +12,7 @@ enum CharacterDelegateError: Error {
     case didSelected
 }
 
-class CharactersTableViewDelegate: NSObject, UITableViewDelegate {
+class CharactersCollectionViewDelegate: NSObject, UICollectionViewDelegate {
     weak var navigation: UINavigationController?
     let viewModel: MainViewModelable
     var selectAction = PassthroughSubject<Character, Never>()
@@ -21,7 +21,7 @@ class CharactersTableViewDelegate: NSObject, UITableViewDelegate {
         self.viewModel = viewModel
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectAction.send(viewModel.characters.value[indexPath.row])
     }
 }

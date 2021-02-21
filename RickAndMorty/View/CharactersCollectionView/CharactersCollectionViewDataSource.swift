@@ -31,7 +31,7 @@ class CharacterCollectionViewDataSource {
             contentConfig.name = character.name
             contentConfig.url = character.image
             collectionViewCell.contentConfiguration = contentConfig
-            collectionViewCell.accessibilityIdentifier = "CharacterTableViewCell_\(indexPath.row)"
+            collectionViewCell.accessibilityIdentifier = "CharacterCollectionViewCell_\(indexPath.row)"
         }
         return cell
     }

@@ -10,17 +10,15 @@ import Combine
 
 class MainViewController: UIViewController {
     let viewModel: MainViewModelable
-    //let characterTableView = CharactersTableView()
-    lazy var characterCollectionView = CharactersCollectionView()
+    let characterCollectionView = CharactersCollectionView()
     lazy var characterDataSource = CharacterCollectionViewDataSource(collectionView: characterCollectionView)
-    lazy var characterDelegate = CharactersTableViewDelegate(viewModel: viewModel)
+    lazy var characterDelegate = CharactersCollectionViewDelegate(viewModel: viewModel)
     lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .medium)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         return activityIndicator
     }()
     var cancellable = Set<AnyCancellable>()
-    var tableViewAction = PassthroughSubject<Character, Never>()
     
     init(viewModel: MainViewModelable) {
         self.viewModel = viewModel
@@ -36,8 +34,8 @@ class MainViewController: UIViewController {
         title = "Characters"
         view.backgroundColor = .systemBackground
         view = characterCollectionView
-        //characterCollectionView.dataSource = characterDataSource.dataSource
-        //characterTableView.delegate = characterDelegate
+        characterCollectionView.dataSource = characterDataSource.dataSource
+        characterCollectionView.delegate = characterDelegate
         addActivity()
     }
 
