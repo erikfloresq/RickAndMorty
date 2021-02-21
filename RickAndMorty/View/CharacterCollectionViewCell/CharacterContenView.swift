@@ -25,7 +25,8 @@ class CharacterContentView: UIView, UIContentView {
     lazy var stackContainer: UIStackView = {
         let stackContainer = UIStackView()
         stackContainer.translatesAutoresizingMaskIntoConstraints = false
-        stackContainer.alignment = .center
+        stackContainer.distribution = .fill
+        stackContainer.alignment = .fill
         stackContainer.axis = .horizontal
         stackContainer.spacing = 10
         return stackContainer
@@ -49,7 +50,7 @@ class CharacterContentView: UIView, UIContentView {
     }
     
     required init?(coder: NSCoder) {
-        return nil
+        super.init(coder: coder)
     }
     
     func makeCustomView() -> UIStackView {
@@ -62,12 +63,12 @@ class CharacterContentView: UIView, UIContentView {
         let constainerStack = makeCustomView()
         addSubview(constainerStack)
         let constraints = [
-            stackContainer.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            stackContainer.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            stackContainer.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            stackContainer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             photo.widthAnchor.constraint(equalToConstant: 100),
-            photo.heightAnchor.constraint(equalToConstant: 104)
+            photo.heightAnchor.constraint(equalToConstant: 104),
+            stackContainer.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
+            stackContainer.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
+            stackContainer.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
+            stackContainer.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
     }

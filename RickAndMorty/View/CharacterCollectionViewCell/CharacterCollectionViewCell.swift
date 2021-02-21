@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CharacterCollectionViewCell: UICollectionViewCell {
+class CharacterCollectionViewCell: UICollectionViewListCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
