@@ -86,6 +86,7 @@
 		086DC8DD25C8E5FC0073208F /* DetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailView.xib; sourceTree = "<group>"; };
 		086DC8E325C8E65D0073208F /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		089D3CF725E295E40096A5C4 /* CharactersCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersCollectionViewDelegate.swift; sourceTree = "<group>"; };
+		089D3D0025E2AD9F0096A5C4 /* RickAndMorty.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RickAndMorty.entitlements; sourceTree = "<group>"; };
 		08B14AB925E1829C00477F8D /* CharactersCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		08E3AEE625C63E0600A4D941 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		08E3F74225DB09C1003B0882 /* CharactersCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersCollectionView.swift; sourceTree = "<group>"; };
@@ -157,6 +158,7 @@
 		084DC7C025C2263000429400 /* RickAndMorty */ = {
 			isa = PBXGroup;
 			children = (
+				089D3D0025E2AD9F0096A5C4 /* RickAndMorty.entitlements */,
 				08E3AEF125C6406A00A4D941 /* Utils */,
 				084DC82725C22F1C00429400 /* API */,
 				084DC81E25C22ED400429400 /* Networking */,
@@ -656,6 +658,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RickAndMorty/RickAndMorty.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CPX7FN2K89;
 				INFOPLIST_FILE = RickAndMorty/Info.plist;
@@ -665,6 +668,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = dev.erikflores.RickAndMorty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -675,6 +679,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RickAndMorty/RickAndMorty.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CPX7FN2K89;
 				INFOPLIST_FILE = RickAndMorty/Info.plist;
@@ -684,6 +689,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = dev.erikflores.RickAndMorty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
