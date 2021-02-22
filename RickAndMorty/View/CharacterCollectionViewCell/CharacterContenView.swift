@@ -54,8 +54,12 @@ class CharacterContentView: UIView, UIContentView {
     }
     
     func makeCustomView() -> UIStackView {
-        stackContainer.addArrangedSubview(photo)
-        stackContainer.addArrangedSubview(name)
+        if Config.gridLayout {
+            stackContainer.addArrangedSubview(photo)
+        } else {
+            stackContainer.addArrangedSubview(photo)
+            stackContainer.addArrangedSubview(name)
+        }
         return stackContainer
     }
     
