@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -19,10 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else {
             return
         }
-        let networking = Networking()
-        let mainViewModel = MainViewModel(networking: networking)
-        let mainViewController = MainViewController(viewModel: mainViewModel)
-        let initViewController = MainNavigationController(rootViewController: mainViewController)
+        let initViewController = UIHostingController(rootView: CharacterListView())
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = initViewController
         window?.makeKeyAndVisible()
