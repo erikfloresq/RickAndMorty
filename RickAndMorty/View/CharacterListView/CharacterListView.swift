@@ -13,7 +13,7 @@ struct CharacterListView: View {
     var body: some View {
         NavigationView {
             List(viewModel.characters, id: \.self) { character in
-                NavigationLink(destination: CharacterDetailView(),
+                NavigationLink(destination: CharacterDetailView(viewModel: CharacterDetailViewModel(character: character)),
                                label: {
                                 CharacterCellView(character: character)
                 })

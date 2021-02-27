@@ -22,6 +22,7 @@ class CharacterDetailViewModel: ObservableObject {
     func getPhoto() {
         let imageURL = character.image
         networking.simpleRequest(url: imageURL)
+            .receive(on: RunLoop.main)
             .sink { completion in
                 switch completion {
                 case .failure:
