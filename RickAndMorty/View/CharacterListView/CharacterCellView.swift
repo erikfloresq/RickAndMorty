@@ -12,7 +12,7 @@ struct CharacterCellView: View {
     @ObservedObject var viewModel = CharacterCellViewModel()
     
     var body: some View {
-        HStack(alignment: .center, spacing: 5) {
+        HStack(alignment: .center, spacing: 10) {
             if let  photoData = viewModel.photoData {
                 Image(uiImage: UIImage(data: photoData) ?? UIImage())
                     .resizable()

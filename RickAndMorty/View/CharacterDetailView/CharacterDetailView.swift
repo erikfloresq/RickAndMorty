@@ -18,17 +18,15 @@ struct CharacterDetailView: View {
                 }
             HStack(spacing: 10) {
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("Name")
-                    Text("Status")
-                    Text("Species")
-                    Text("Type")
-                    Text("Gender")
-                    Text("Origin")
-                    Text("Location")
-                    Text("Episode")
+                    Text("Status").bold()
+                    Text("Species").bold()
+                    Text("Type").bold()
+                    Text("Gender").bold()
+                    Text("Origin").bold()
+                    Text("Location").bold()
+                    Text("Episode").bold()
                 }.frame(width: 100)
                 VStack(alignment: .leading, spacing: 10) {
-                    Text(viewModel.character.name)
                     Text(viewModel.character.status)
                     Text(viewModel.character.species)
                     Text(viewModel.character.type)
@@ -37,7 +35,7 @@ struct CharacterDetailView: View {
                     Text(viewModel.character.location.name)
                     Text("\(viewModel.character.episode.count)")
                 }
-            }
+            }.padding()
             Spacer()
         }.ignoresSafeArea()
     }
@@ -64,17 +62,18 @@ struct CharacterDetailView: View {
         var title: String
         
         var body: some View {
-            ZStack {
+            ZStack(alignment: .leading) {
                 DetailImage(photoData: $photoData)
                 VStack {
                     Spacer()
                     Text(title)
-                        .font(Font.title)
                         .bold()
-                        .shadow(color: Color.white, radius: 2, x: -2, y: -2)
+                        .font(Font.title)
+                        .shadow(color: Color(.systemBackground), radius: 1, x: -2, y: 2)
+                        .padding(.leading, 30)
+                        .padding(.bottom, 20)
                 }
-            }
-            
+            }.frame(height: 400)
         }
     }
 }
