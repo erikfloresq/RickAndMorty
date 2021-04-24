@@ -20,5 +20,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 
+    func application(_ application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
+        guard userActivity?.activityType == NSUserActivityTypeBrowsingWeb,
+              let url = userActivity?.webpageURL,
+              let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
+            return false
+        }
+
+        // 2
+        if components.path == "buy" {
+
+          return true
+        }
+
+        if components.path == "help" {
+            return true
+        }
+
+        // 3
+        if let webpageUrl = URL(string: "http://try-webpage.herokuapp.com") {
+          application.open(webpageUrl)
+          return false
+        }
+
+        return false
+    }
+
 }
 
